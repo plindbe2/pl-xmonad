@@ -1,0 +1,35 @@
+Config { font = "xft:terminus:size=8:antialias=true"
+       , additionalFonts = ["xft:terminus:bold:size=10:antialias=true"]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "#333a42"
+       , fgColor = "#bbb4bc"
+       , alpha = 255
+       , position = TopSize C 100 18
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run Network "eth1" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    -- , Run MPD ["-t",
+                    --            "<title> (<artist>) <statei>",
+                    --            "--", "-P", ">>", "-Z", "|", "-S", "><"] 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       -- , template = "%StdinReader% }{ <fc=#20d8e8>%mpd%</fc>  <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ <fc=#ee9a00>%date%</fc>"
+       }
